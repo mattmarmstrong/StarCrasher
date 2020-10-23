@@ -1,34 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
+    public InventoryObject inventory;
+    public InventoryObject equipment;
 
-    public float movementSpeed = 0.5f;
-    public Tilemap groundTilemap = null;
-    public Tilemap wallTilemap = null;
-    public TileBase groundTile = null;
-    public TileBase pathTile = null;
-    public Rigidbody2D playerBody;
+    public float speed;
+    private Rigidbody2D rb2d;
+    private Vector2 moveVelocity;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Get input from arrow keys or WASD
-        float horizontalInput = Input.GetAxisRaw("Horizontal") * movementSpeed;
-        float verticalInput = Input.GetAxisRaw("Vertical") * movementSpeed;
-
-        // move freely according to keyboard input
-        transform.Translate(new Vector3(horizontalInput, verticalInput));
+        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        moveVelocity = moveInput.normalized * speed;
     }
 
-    
+    private void FixedUpdate()
+    {
+        rb2d.MovePosition(rb2d.position + moveVelocity * Time.fixedDeltaTime);
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        var item = other.GetComponent<GroundItem>();
+        if (item)
+        {
+            if (inventory.AddItem(new Item(item.itemObject), 1))
+            {
+                Destroy(other.gameObject);
+            }
+        }
+
+    }
+    private void OnApplicationQuit()
+    {
+        inventory.Container.Clear();
+        equipment.Container.Clear();
+    }
 }
