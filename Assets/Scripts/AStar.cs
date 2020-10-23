@@ -21,6 +21,8 @@ public class AStar : MonoBehaviour
     public static HashSet<Node> openList;
     public static Dictionary<Vector3Int, Node> nodePositions;
 
+    public Chunk chunk;
+
     // Values for A* search
     public Node startNode;
     public Node endNode;
@@ -32,7 +34,7 @@ public class AStar : MonoBehaviour
      * Initialize the data structures for the A* search.
      * Save the start and goal positions and the start node.
      */
-    private void initializePathfinding(Vector3Int startPos, Vector3Int goalPos)
+    private void initializePathfinding(Vector3Int startPos, Vector3Int goalPos, Chunk ch)
     {
         // Initialize open and closed lists
         openList = new HashSet<Node>();
@@ -44,6 +46,8 @@ public class AStar : MonoBehaviour
         // Save start and goal positions
         startPosition = startPos;
         goalPosition = goalPos;
+
+        chunk = ch;
 
         // Get/create the starting node and set its costs to 0 and parent to null
         startNode = getNode(startPos);
@@ -63,10 +67,10 @@ public class AStar : MonoBehaviour
      * Return a stack containing position coordinates for each step along the
      * shortest path with the first step being on the top.
      */
-    public Stack<Vector3Int> aStarGetPath(Vector3Int startPos, Vector3Int goalPos)
+    public Stack<Vector3Int> aStarGetPath(Vector3Int startPos, Vector3Int goalPos, Chunk chunk)
     {
         // Initialize open and closed lists, add start node to open list
-        initializePathfinding(startPos, goalPos);
+        initializePathfinding(startPos, goalPos, chunk);
 
         while (openList.Count > 0)
         {
@@ -206,21 +210,14 @@ public class AStar : MonoBehaviour
      */
     private Node getNode(Vector3Int position)
     {
-        // TODO check if wall position to not add a node or to set a high node cost
-
-        // If the position is not on the tilemap, return null
-        //if (groundTilemap.GetTile(position) is null)
-        //{
-        //    Debug.Log("Ground Tile is null at: " + position);
-        //    return null;
-        //}
-
+        int[,] wallMap = chunk.GetMapArray();
         // If the position is a wall, return null because it is not walkable
-        //if (!(wallTilemap.GetTile(position) is null))
-        //{
-        //    Debug.Log("Wall Tile is not null at: " + position);
-        //    return null;
-        //}
+        if(wallMap[position.x, position.y] == 1)
+        {
+            //Debug.Log("Wall Tile is not null at: " + position);
+            return null;
+        }
+
 
         // Return the node if it is in the dictionary, otherwise create it
         if (nodePositions.ContainsKey(position))

@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
     private void findNewPath(Vector3Int playerPosition, Vector3Int myPosition)
     {
         // Compute shortest path to the player using AStar
-        Stack<Vector3Int> path = aStar.aStarGetPath(myPosition, playerPosition);
+        Stack<Vector3Int> path = aStar.aStarGetPath(myPosition, playerPosition, curChunk);
 
         // Clear the old path from the screen
         aStar.clearPath(pathToPlayer);
