@@ -1481,6 +1481,7 @@ GameObject:
   - component: {fileID: 393318237}
   - component: {fileID: 393318236}
   - component: {fileID: 393318235}
+  - component: {fileID: 393318241}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1620,6 +1621,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &393318241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393318234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1eff8c0a0c74995999b6c271f2d37c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1901598627}
+  aStar: {fileID: 393194648}
+  enemySpeed: 1
+  groundTilemap: {fileID: 1163826958}
+  pathTile: {fileID: 11400000, guid: 34f41b6514a074c3ea84a1857b5ae356, type: 2}
+  groundTile: {fileID: 11400000, guid: 940cb41379f05c64bba9f6d265e53cba, type: 2}
+  worldGrid: {fileID: 1721328193}
+  mapGrid: {fileID: 1640613489}
 --- !u!1 &397286253
 GameObject:
   m_ObjectHideFlags: 0

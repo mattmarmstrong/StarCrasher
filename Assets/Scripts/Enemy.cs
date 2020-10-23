@@ -15,22 +15,58 @@ public class Enemy : MonoBehaviour
 
     private Stack<Vector3Int> pathToPlayer = null;
     private Vector3Int playerPosition;
+    private Vector3Int oldPlayerPosition = new Vector3Int(0,0,0);
+
+    bool posInitialized = false;
+    public Grid worldGrid;
+    public mapgen mapGrid;
+    private Chunk curChunk;
 
     // Update is called once per frame
     void Update()
     {
-        Vector3Int myPosition = Vector3Int.RoundToInt(transform.position);
+        if (!posInitialized)
+        {
+            transform.position = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
+            posInitialized = true;
+            //Debug.Log("Enemy Grid Position = " + getTilePos(transform.position));
+            //Debug.Log("Enemy World Position = " + getWorldPos(getTilePos(transform.position)));
+            //Debug.Log("Player Position = " + getTilePos(player.transform.position));
+        }
+
+        //Vector3Int myPosition = Vector3Int.RoundToInt(transform.position);
+        //playerPosition = Vector3Int.RoundToInt(player.transform.position);
+
+        // Set positions to be tile positions
+        Vector3Int myPosition = getTilePos(transform.position);
+        playerPosition = getTilePos(player.transform.position);
+
 
         // Find a new path if the player has moved
-        if(playerPosition != player.transform.position)
+        if (playerPosition != oldPlayerPosition)
         {
-            playerPosition = Vector3Int.RoundToInt(player.transform.position);
+            //Debug.Log("playerPosition does not equal oldPlayerPosition");
+            oldPlayerPosition = playerPosition;
+            //playerPosition = Vector3Int.RoundToInt(player.transform.position);
             findNewPath(playerPosition, myPosition);
         }
 
         // Move the enemy along the found path
         moveAlongPath();
 
+    }
+
+    private Vector3Int getTilePos(Vector3 pos)
+    {
+        curChunk = mapGrid.LocateChunk(pos);
+        int[] tilepos = curChunk.GetTilePoint(pos);
+        return new Vector3Int(tilepos[0], tilepos[1], 0);
+
+    }
+
+    private Vector3 getWorldPos(Vector3Int pos)
+    {
+        return curChunk.GetWorldPos(pos);
     }
 
     private void findNewPath(Vector3Int playerPosition, Vector3Int myPosition)
@@ -58,14 +94,16 @@ public class Enemy : MonoBehaviour
         if ((pathToPlayer is null) || (pathToPlayer.Count == 0))
             return;
         float step = enemySpeed * Time.deltaTime;
-        Vector3Int point = pathToPlayer.Peek();
+        Vector3 point = getWorldPos(pathToPlayer.Peek());
+        //Debug.Log("Path point (world) = " + point);
         transform.position = Vector3.MoveTowards(transform.position, point, step);
 
         // Remove the point from the stack when the enemy gets to it
         // Remove path colouring from the tile after the enemy reaches it
         if (Vector3.Distance(transform.position, point) < 0.001f)
         {
-            groundTilemap.SetTile(pathToPlayer.Pop(), groundTile);
+            pathToPlayer.Pop();
+            //groundTilemap.SetTile(pathToPlayer.Pop(), groundTile);
         }
             
     }

@@ -192,6 +192,7 @@ public class AStar : MonoBehaviour
         Stack<Vector3Int> path = new Stack<Vector3Int>();
         while (endNode.position != startPosition)
         {
+            //Debug.Log("Path point (Chunk) = " + endNode.position);
             path.Push(endNode.position);
             endNode = endNode.getParent();
         }
@@ -205,13 +206,21 @@ public class AStar : MonoBehaviour
      */
     private Node getNode(Vector3Int position)
     {
+        // TODO check if wall position to not add a node or to set a high node cost
+
         // If the position is not on the tilemap, return null
-        if (groundTilemap.GetTile(position) is null)
-            return null;
+        //if (groundTilemap.GetTile(position) is null)
+        //{
+        //    Debug.Log("Ground Tile is null at: " + position);
+        //    return null;
+        //}
 
         // If the position is a wall, return null because it is not walkable
-        if (!(wallTilemap.GetTile(position) is null))
-            return null;
+        //if (!(wallTilemap.GetTile(position) is null))
+        //{
+        //    Debug.Log("Wall Tile is not null at: " + position);
+        //    return null;
+        //}
 
         // Return the node if it is in the dictionary, otherwise create it
         if (nodePositions.ContainsKey(position))

@@ -92,17 +92,17 @@ public class Chunk
 
     private async void BuildChunk(int smoothCount, int roomSizeThreshold, int tunnelSize, float fillProb, System.Random rng)
     {
-        Debug.Log(String.Format("Starting Chunk {0},{1}", mapPosX, mapPosY));
+        //Debug.Log(String.Format("Starting Chunk {0},{1}", mapPosX, mapPosY));
         FillMap(fillProb, rng);
-        Debug.Log("Filled...");
+        //Debug.Log("Filled...");
         for (int i = 0; i < smoothCount; i++) {
             SmoothMap();
         }
-        Debug.Log("Smoothed...");
+        //Debug.Log("Smoothed...");
 
         var roomTask = FillPocketAreas(roomSizeThreshold);
         List<Room> chunkRooms = await roomTask;
-        Debug.Log("Pockets Filled...");
+        //Debug.Log("Pockets Filled...");
         // ConnectNearbyRooms(chunkRooms, tunnelSize);
         // Debug.Log("Tunnels Dug... Next");
     }
@@ -125,6 +125,13 @@ public class Chunk
     public int[] GetTilePoint(Vector3 pos) {
         Vector3Int intVector = worldGrid.WorldToCell(pos);
         return new int[2] {intVector.x - map.GetUpperBound(0) * mapPosX, intVector.y - map.GetUpperBound(1) * mapPosY};
+    }
+
+
+    public Vector3 GetWorldPos(Vector3Int tilePos)
+    {
+        Vector3Int newPos = new Vector3Int(tilePos.x + map.GetUpperBound(0) / mapPosX, tilePos.y + map.GetUpperBound(1) / mapPosY, 0);
+        return worldGrid.CellToWorld(newPos);
     }
 
     struct Coord
