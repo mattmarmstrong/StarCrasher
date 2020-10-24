@@ -1532,7 +1532,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.005, y: -0.0095}
+  m_Offset: {x: -0.005, y: 0.16}
   m_Size: {x: 0.19, y: 0.299}
   m_Direction: 0
 --- !u!50 &393318238
@@ -1606,7 +1606,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!4 &393318240
 Transform:
   m_ObjectHideFlags: 0
@@ -6437,7 +6437,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.005, y: -0.0095}
+  m_Offset: {x: -0.005, y: 0.16}
   m_Size: {x: 0.19, y: 0.299}
   m_Direction: 0
 --- !u!114 &1901598627
