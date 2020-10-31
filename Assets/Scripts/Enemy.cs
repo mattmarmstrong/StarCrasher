@@ -27,7 +27,14 @@ public class Enemy : MonoBehaviour
     {
         if (!posInitialized)
         {
-            transform.position = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
+            Debug.Log("Enemy name = " + this.name);
+            Vector3 startPos;
+            if (this.name == "Enemy1")
+                startPos = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
+            else
+                startPos = player.transform.position + new Vector3(-0.5f, 0.1f, 0f);
+            //transform.position = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
+            transform.position = startPos;
             posInitialized = true;
             //Debug.Log("Enemy Grid Position = " + getTilePos(transform.position));
             //Debug.Log("Enemy World Position = " + getWorldPos(getTilePos(transform.position)));
