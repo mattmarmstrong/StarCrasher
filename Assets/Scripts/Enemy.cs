@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     private Vector3Int playerPosition;
     private Vector3Int oldPlayerPosition = new Vector3Int(0,0,0);
 
+    bool caughtPlayer = false;
+
     bool posInitialized = false;
     public Grid worldGrid;
     public mapgen mapGrid;
@@ -50,16 +52,16 @@ public class Enemy : MonoBehaviour
 
 
         // Find a new path if the player has moved
-        if (playerPosition != oldPlayerPosition)
+        if ((playerPosition != oldPlayerPosition) && (!caughtPlayer) )
         {
             //Debug.Log("playerPosition does not equal oldPlayerPosition");
             oldPlayerPosition = playerPosition;
             //playerPosition = Vector3Int.RoundToInt(player.transform.position);
             findNewPath(playerPosition, myPosition);
         }
-
-        // Move the enemy along the found path
-        moveAlongPath();
+        if(!caughtPlayer)
+            // Move the enemy along the found path
+            moveAlongPath();
 
     }
 
@@ -80,6 +82,10 @@ public class Enemy : MonoBehaviour
     {
         // Compute shortest path to the player using AStar
         Stack<Vector3Int> path = aStar.aStarGetPath(myPosition, playerPosition, curChunk);
+
+        //TODO maybe check if myPos and playerPos are on walls before sending to pathfinding
+            // Could just find a close walkable tile to use instead?
+
 
         // Clear the old path from the screen
         aStar.clearPath(pathToPlayer);
@@ -113,5 +119,17 @@ public class Enemy : MonoBehaviour
             //groundTilemap.SetTile(pathToPlayer.Pop(), groundTile);
         }
             
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.name == "Player")
+            caughtPlayer = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Player")
+            caughtPlayer = false;
     }
 }

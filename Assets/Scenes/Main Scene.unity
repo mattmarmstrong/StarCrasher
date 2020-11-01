@@ -1526,14 +1526,14 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393318234}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.005, y: 0.15}
-  m_Size: {x: 0.19, y: 0.299}
+  m_Size: {x: 0.18, y: 0.0001}
   m_Direction: 0
 --- !u!50 &393318238
 Rigidbody2D:
@@ -7040,14 +7040,14 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050181836}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.005, y: 0.15}
-  m_Size: {x: 0.19, y: 0.299}
+  m_Size: {x: 0.18, y: 0.0001}
   m_Direction: 0
 --- !u!50 &2050181841
 Rigidbody2D:

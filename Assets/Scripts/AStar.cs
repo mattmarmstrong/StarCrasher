@@ -24,6 +24,7 @@ public class AStar : MonoBehaviour
     public Chunk chunk;
 
     // Values for A* search
+    public Node prevStartNode;
     public Node startNode;
     public Node endNode;
     public Vector3Int startPosition;
@@ -51,7 +52,15 @@ public class AStar : MonoBehaviour
 
         // Get/create the starting node and set its costs to 0 and parent to null
         startNode = getNode(startPos);
-        Assert.IsNotNull(startNode, "startNode is null after initialization.");
+        //Assert.IsNotNull(startNode, "startNode is null after initialization.");
+        if (startNode is null)
+        {
+            Debug.Log("StartNode was null");
+            startNode = prevStartNode;
+        }
+            
+        else
+            prevStartNode = startNode;
         startNode.setGCost(0);
         startNode.setHCost(0);
         startNode.setParent(null);
@@ -194,6 +203,8 @@ public class AStar : MonoBehaviour
     private Stack<Vector3Int> savePath(Node endNode)
     {
         Stack<Vector3Int> path = new Stack<Vector3Int>();
+
+        //while (!(endNode is null) && endNode.position != startPosition)
         while (endNode.position != startPosition)
         {
             //Debug.Log("Path point (Chunk) = " + endNode.position);
@@ -212,7 +223,7 @@ public class AStar : MonoBehaviour
     {
         int[,] wallMap = chunk.GetMapArray();
         // If the position is a wall, return null because it is not walkable
-        if(wallMap[position.x, position.y] == 1)
+        if (wallMap[position.x, position.y] == 1)
         {
             //Debug.Log("Wall Tile is not null at: " + position);
             return null;
