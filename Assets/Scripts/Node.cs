@@ -34,6 +34,13 @@ public class Node
         fCost = gCost + hCost;
     }
 
+    public void setWallCosts()
+    {
+        hCost = int.MaxValue / 3;
+        gCost = int.MaxValue / 3;
+        fCost = gCost + hCost;
+    }
+
     public int getHCost() { return hCost; }
 
     public int getGCost() { return gCost; }
