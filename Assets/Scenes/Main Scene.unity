@@ -1464,7 +1464,7 @@ MonoBehaviour:
   neighbourTile: {fileID: 0}
   curNodeTile: {fileID: 0}
   pathTile: {fileID: 11400000, guid: 34f41b6514a074c3ea84a1857b5ae356, type: 2}
-  groundTile: {fileID: 11400000, guid: 940cb41379f05c64bba9f6d265e53cba, type: 2}
+  groundTile: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
   goalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &393318234
@@ -1638,7 +1638,7 @@ MonoBehaviour:
   enemySpeed: 0.75
   groundTilemap: {fileID: 1163826958}
   pathTile: {fileID: 11400000, guid: 34f41b6514a074c3ea84a1857b5ae356, type: 2}
-  groundTile: {fileID: 11400000, guid: 940cb41379f05c64bba9f6d265e53cba, type: 2}
+  groundTile: {fileID: 0}
   worldGrid: {fileID: 1721328193}
   mapGrid: {fileID: 1640613489}
 --- !u!1 &397286253
@@ -5414,16 +5414,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1640613488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 196d15d710d08514481ed7675ec95cda, type: 3}
+  m_Script: {fileID: 11500000, guid: b2aa064d18479154dac4a44661460fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mapSize: 2
-  chunkSize: 100
-  fillProb: 58.6
-  smoothCount: 2
+  chunkSize: 64
+  fillProb: 59.4
+  smoothCount: 1
   mapSeed: random
   roomSizeThreshold: 200
-  tunnelSize: 2
+  tunnelSize: 0
   player: {fileID: 1901598621}
 --- !u!4 &1640613490
 Transform:
@@ -5931,13 +5931,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1721328191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b50882ef3d6153840b832acd7ceeef9f, type: 3}
+  m_Script: {fileID: 11500000, guid: e5e47ee8b74c55b4f8800a61539f4513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap_open: {fileID: 1163826958}
   tilemap_closed: {fileID: 954899433}
-  floorTile: {fileID: 11400000, guid: 940cb41379f05c64bba9f6d265e53cba, type: 2}
-  wallTile: {fileID: 11400000, guid: 299974873f69e1842a257803900b2c26, type: 2}
+  floorTile: {fileID: 0}
+  wallTile: {fileID: 0}
   mapGrid: {fileID: 1640613489}
 --- !u!156049354 &1721328193
 Grid:
