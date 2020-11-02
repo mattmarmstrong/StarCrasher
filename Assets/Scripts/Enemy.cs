@@ -6,26 +6,26 @@ using UnityEngine.Tilemaps;
 public class Enemy : MonoBehaviour
 {
     public Player player;
-    public AStar aStar;
-    public float enemySpeed;
+    //public AStar aStar;
+    //public float enemySpeed;
 
-    public Tilemap groundTilemap = null;
-    public TileBase pathTile = null;
-    public TileBase groundTile = null;
+    //public Tilemap groundTilemap = null;
+    //public TileBase pathTile = null;
+    //public TileBase groundTile = null;
 
-    private Stack<Vector3Int> pathToPlayer = null;
-    private Vector3Int playerPosition;
-    private Vector3Int oldPlayerPosition = new Vector3Int(0, 0, 0);
+    //private Stack<Vector3Int> pathToPlayer = null;
+    //private Vector3Int playerPosition;
+    //private Vector3Int oldPlayerPosition = new Vector3Int(0, 0, 0);
 
-    bool caughtPlayer = false;
+    //bool caughtPlayer = false;
 
     bool posInitialized = false;
-    public Grid worldGrid;
-    public mapgen mapGrid;
-    private Chunk curChunk;
+    //public Grid worldGrid;
+    //public mapgen mapGrid;
+    //private Chunk curChunk;
 
-    public CapsuleCollider2D enemyCollider;
-    public CompositeCollider2D wallCollider;
+    //public CapsuleCollider2D enemyCollider;
+    //public CompositeCollider2D wallCollider;
 
     //private bool mapScanned = false;
 
@@ -43,13 +43,6 @@ public class Enemy : MonoBehaviour
             posInitialized = true;
         }
 
-        //if (!mapScanned)
-        //{
-        //    Debug.Log("Scanning...");
-        //    AstarPath.active.Scan();
-        //    mapScanned = true;
-        //}
-        //Debug.Log("After Scan.");
     }
 }
 
