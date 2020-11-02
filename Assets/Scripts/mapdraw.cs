@@ -11,6 +11,8 @@ public class mapdraw : MonoBehaviour
 
     public mapgen mapGrid;
 
+    private int mapScanned = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,14 @@ public class mapdraw : MonoBehaviour
             clickedChunk.TogglePoint(tilepos[0], tilepos[1]);
             UpdateChunk(clickedChunk);
         }
+        if (mapScanned < 2)
+        {
+            Debug.Log("Scanning...");
+            AstarPath.active.Scan();
+            mapScanned++;
+            Debug.Log("After Scan.");
+        }
+
     }
 
     void UpdateChunk(Chunk ch)
