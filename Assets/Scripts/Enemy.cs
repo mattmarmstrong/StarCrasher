@@ -39,7 +39,13 @@ public class Enemy : MonoBehaviour
     {
         if (!posInitialized)
         {
-            transform.position = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
+            Vector3 startPos;
+            if (this.name == "Enemy1")
+                startPos = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
+            else
+                startPos = player.transform.position + new Vector3(-0.5f, 0.1f, 0f);
+            //transform.position = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
+            transform.position = startPos;
             posInitialized = true;
         }
 
