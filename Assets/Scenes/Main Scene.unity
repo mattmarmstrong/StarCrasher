@@ -4477,7 +4477,7 @@ PrefabInstance:
     - target: {fileID: 4288322775598255781, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1901598627}
+      objectReference: {fileID: 0}
     - target: {fileID: 7222171618906716876, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
       propertyPath: target
       value: 
@@ -6381,6 +6381,50 @@ MonoBehaviour:
   inventory: {fileID: 11400000, guid: c162a99178cc4d448a2da88358c34a4b, type: 2}
   equipment: {fileID: 11400000, guid: 4992f6c996b5ba2419da5b1fb2bbbe4d, type: 2}
   speed: 1.5
+--- !u!1 &1910865918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1910865920}
+  - component: {fileID: 1910865919}
+  m_Layer: 0
+  m_Name: CreateEnemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1910865919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910865918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a616215b66ae1478698ae521c98f951b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPrefab: {fileID: 4288322775598255774, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
+--- !u!4 &1910865920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910865918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.041491, y: 15.048099, z: -2.8313649}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1943596509
 GameObject:
   m_ObjectHideFlags: 0
@@ -6949,7 +6993,7 @@ PrefabInstance:
     - target: {fileID: 4288322775598255781, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1901598627}
+      objectReference: {fileID: 0}
     - target: {fileID: 7222171618906716876, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
       propertyPath: target
       value: 

@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 using UnityEngine.Tilemaps;
 
 public class Enemy : MonoBehaviour
 {
-    public Player player;
+    public GameObject player;
     //public AStar aStar;
     //public float enemySpeed;
 
@@ -33,6 +34,11 @@ public class Enemy : MonoBehaviour
     {
 
         //Physics2D.IgnoreCollision(enemyCollider, wallCollider);
+        player = GameObject.Find("Player");
+
+        var aiDestSetter = GetComponent<AIDestinationSetter>();
+        aiDestSetter.target = player.transform;
+
     }
 
     private void Update()
