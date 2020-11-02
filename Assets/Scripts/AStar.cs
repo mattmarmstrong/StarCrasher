@@ -142,7 +142,7 @@ public class AStar : MonoBehaviour
             for (int y = -1; y <= 1; y++)
             {
                 // Don't add the current node to the neighbours list
-                if (!(x == 0 && y == 0))
+                if (!(x == 0 && y == 0))// && !(Mathf.Abs(x) == Mathf.Abs(y)))
                 {
                     Vector3Int neighbourPosition = new Vector3Int(curNode.position.x - x, curNode.position.y - y, curNode.position.z);
                     Node n = getNode(neighbourPosition);
@@ -221,14 +221,9 @@ public class AStar : MonoBehaviour
      */
     private Node getNode(Vector3Int position)
     {
-        int[,] wallMap = chunk.GetMapArray();
         // If the position is a wall, return null because it is not walkable
-        if (wallMap[position.x, position.y] == 1)
-        {
-            //Debug.Log("Wall Tile is not null at: " + position);
+        if (isWall(position))
             return null;
-        }
-
 
         // Return the node if it is in the dictionary, otherwise create it
         if (nodePositions.ContainsKey(position))
@@ -239,9 +234,36 @@ public class AStar : MonoBehaviour
         {
             // Create a new node if it doesn't already exist
             Node newNode = new Node(position);
+            //if (isWall(position))
+            //    newNode.setWallCosts();
             nodePositions.Add(position, newNode);
             return newNode;
         }
+    }
+
+    private bool isWall(Vector3Int position)
+    {
+        int[,] wallMap = chunk.GetMapArray();
+
+        return (wallMap[position.x, position.y] == 1) || (wallMap[position.x, position.y+1] == 1);
+
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                try
+                {
+                    if (wallMap[position.x + x, position.y + y] == 1)
+                        return true;
+                }
+                catch (System.IndexOutOfRangeException)
+                {   // Return true if the position is not even on the map
+                    return true;
+                }
+
+            }
+        }
+        return false;
     }
 
     /*

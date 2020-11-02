@@ -24,6 +24,15 @@ public class Enemy : MonoBehaviour
     public mapgen mapGrid;
     private Chunk curChunk;
 
+    public CapsuleCollider2D enemyCollider;
+    public CompositeCollider2D wallCollider;
+
+    private void Start()
+    {
+        
+        Physics2D.IgnoreCollision(enemyCollider, wallCollider);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -106,30 +115,31 @@ public class Enemy : MonoBehaviour
         // Don't do anything if the path is empty
         if ((pathToPlayer is null) || (pathToPlayer.Count == 0))
             return;
-        float step = enemySpeed * Time.deltaTime;
-        Vector3 point = getWorldPos(pathToPlayer.Peek());
-        //Debug.Log("Path point (world) = " + point);
-        transform.position = Vector3.MoveTowards(transform.position, point, step);
+        float speed = enemySpeed * Time.deltaTime;
+        Vector3 targetPos = getWorldPos(pathToPlayer.Peek());
+        //Debug.Log("Path point (world) = " + targetPos);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed);
 
         // Remove the point from the stack when the enemy gets to it
         // Remove path colouring from the tile after the enemy reaches it
-        if (Vector3.Distance(transform.position, point) < 0.001f)
+        if (Vector3.Distance(transform.position, targetPos) < 0.001f)
         {
             pathToPlayer.Pop();
             //groundTilemap.SetTile(pathToPlayer.Pop(), groundTile);
-        }
-            
+        } 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "Player")
             caughtPlayer = true;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Player")
             caughtPlayer = false;
     }
+
 }
