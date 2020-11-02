@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
 
     private Stack<Vector3Int> pathToPlayer = null;
     private Vector3Int playerPosition;
-    private Vector3Int oldPlayerPosition = new Vector3Int(0,0,0);
+    private Vector3Int oldPlayerPosition = new Vector3Int(0, 0, 0);
 
     bool caughtPlayer = false;
 
@@ -27,91 +27,113 @@ public class Enemy : MonoBehaviour
     public CapsuleCollider2D enemyCollider;
     public CompositeCollider2D wallCollider;
 
+    //private bool mapScanned = false;
+
     private void Start()
     {
-        
+
         //Physics2D.IgnoreCollision(enemyCollider, wallCollider);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!posInitialized)
         {
-            Debug.Log("Enemy name = " + this.name);
-            Vector3 startPos;
-            if (this.name == "Enemy1")
-                startPos = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
-            else
-                startPos = player.transform.position + new Vector3(-0.5f, 0.1f, 0f);
-            //transform.position = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
-            transform.position = startPos;
+            transform.position = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
             posInitialized = true;
-            //Debug.Log("Enemy Grid Position = " + getTilePos(transform.position));
-            //Debug.Log("Enemy World Position = " + getWorldPos(getTilePos(transform.position)));
-            //Debug.Log("Player Position = " + getTilePos(player.transform.position));
         }
 
-        //Vector3Int myPosition = Vector3Int.RoundToInt(transform.position);
-        //playerPosition = Vector3Int.RoundToInt(player.transform.position);
+        //if (!mapScanned)
+        //{
+        //    Debug.Log("Scanning...");
+        //    AstarPath.active.Scan();
+        //    mapScanned = true;
+        //}
+        //Debug.Log("After Scan.");
+    }
+}
 
-        // Set positions to be tile positions
-        Vector3Int myPosition = getTilePos(transform.position);
-        playerPosition = getTilePos(player.transform.position);
-
-
-        // Find a new path if the player has moved
-        if ((playerPosition != oldPlayerPosition) && (!caughtPlayer) )
+    /*
+        // Update is called once per frame
+        void Update()
         {
-            //Debug.Log("playerPosition does not equal oldPlayerPosition");
-            oldPlayerPosition = playerPosition;
+            if (!posInitialized)
+            {
+                Debug.Log("Enemy name = " + this.name);
+                Vector3 startPos;
+                if (this.name == "Enemy1")
+                    startPos = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
+                else
+                    startPos = player.transform.position + new Vector3(-0.5f, 0.1f, 0f);
+                //transform.position = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
+                transform.position = startPos;
+                posInitialized = true;
+                //Debug.Log("Enemy Grid Position = " + getTilePos(transform.position));
+                //Debug.Log("Enemy World Position = " + getWorldPos(getTilePos(transform.position)));
+                //Debug.Log("Player Position = " + getTilePos(player.transform.position));
+            }
+
+            //Vector3Int myPosition = Vector3Int.RoundToInt(transform.position);
             //playerPosition = Vector3Int.RoundToInt(player.transform.position);
-            findNewPath(playerPosition, myPosition);
+
+            // Set positions to be tile positions
+            Vector3Int myPosition = getTilePos(transform.position);
+            playerPosition = getTilePos(player.transform.position);
+
+
+            // Find a new path if the player has moved
+            if ((playerPosition != oldPlayerPosition) && (!caughtPlayer) )
+            {
+                //Debug.Log("playerPosition does not equal oldPlayerPosition");
+                oldPlayerPosition = playerPosition;
+                //playerPosition = Vector3Int.RoundToInt(player.transform.position);
+                findNewPath(playerPosition, myPosition);
+            }
+            if(!caughtPlayer)
+                // Move the enemy along the found path
+                moveAlongPath();
+
         }
-        if(!caughtPlayer)
-            // Move the enemy along the found path
-            moveAlongPath();
 
-    }
+        private Vector3Int getTilePos(Vector3 pos)
+        {
+            curChunk = mapGrid.LocateChunk(pos);
+            int[] tilepos = curChunk.GetTilePoint(pos);
+            return new Vector3Int(tilepos[0], tilepos[1], 0);
 
-    private Vector3Int getTilePos(Vector3 pos)
-    {
-        curChunk = mapGrid.LocateChunk(pos);
-        int[] tilepos = curChunk.GetTilePoint(pos);
-        return new Vector3Int(tilepos[0], tilepos[1], 0);
+        }
 
-    }
+        private Vector3 getWorldPos(Vector3Int pos)
+        {
+            return curChunk.GetWorldPos(pos);
+        }
 
-    private Vector3 getWorldPos(Vector3Int pos)
-    {
-        return curChunk.GetWorldPos(pos);
-    }
+        private void findNewPath(Vector3Int playerPosition, Vector3Int myPosition)
+        {
+            // Compute shortest path to the player using AStar
+            Stack<Vector3Int> path = aStar.aStarGetPath(myPosition, playerPosition, curChunk);
 
-    private void findNewPath(Vector3Int playerPosition, Vector3Int myPosition)
-    {
-        // Compute shortest path to the player using AStar
-        Stack<Vector3Int> path = aStar.aStarGetPath(myPosition, playerPosition, curChunk);
-
-        //TODO maybe check if myPos and playerPos are on walls before sending to pathfinding
-            // Could just find a close walkable tile to use instead?
+            //TODO maybe check if myPos and playerPos are on walls before sending to pathfinding
+                // Could just find a close walkable tile to use instead?
 
 
-        // Clear the old path from the screen
-        aStar.clearPath(pathToPlayer);
+            // Clear the old path from the screen
+            aStar.clearPath(pathToPlayer);
 
-        // Draw the new path
-        aStar.colourPath(path);
+            // Draw the new path
+            aStar.colourPath(path);
 
-        // Set the new path to move along
-        pathToPlayer = path;
+            // Set the new path to move along
+            pathToPlayer = path;
 
-    }
+        }
+    */
 
-    private void moveAlongPath()
+    //private void moveAlongPath()
     /* Used parts of the example code in the docs at the following link.
      * https://docs.unity3d.com/ScriptReference/Vector3.MoveTowards.html 
      */
-    {
+/*    {
         // Don't do anything if the path is empty
         if ((pathToPlayer is null) || (pathToPlayer.Count == 0))
             return;
@@ -143,3 +165,4 @@ public class Enemy : MonoBehaviour
     }
 
 }
+*/
