@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         
-        Physics2D.IgnoreCollision(enemyCollider, wallCollider);
+        //Physics2D.IgnoreCollision(enemyCollider, wallCollider);
     }
 
     // Update is called once per frame

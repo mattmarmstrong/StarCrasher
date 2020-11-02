@@ -2272,6 +2272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy2
       objectReference: {fileID: 0}
+    - target: {fileID: 4288322775598255774, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4288322775598255775, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
       propertyPath: healthBar
       value: 
@@ -6909,22 +6913,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4288322775598255769, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
-      propertyPath: m_Size.x
-      value: 0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 4288322775598255769, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
-      propertyPath: m_Size.y
-      value: 0.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 4288322775598255769, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 4288322775598255769, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4288322775598255774, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
       propertyPath: m_Name
       value: Enemy1

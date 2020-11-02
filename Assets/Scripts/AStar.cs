@@ -247,23 +247,23 @@ public class AStar : MonoBehaviour
 
         return (wallMap[position.x, position.y] == 1) || (wallMap[position.x, position.y+1] == 1);
 
-        for (int x = -1; x <= 1; x++)
-        {
-            for (int y = -1; y <= 1; y++)
-            {
-                try
-                {
-                    if (wallMap[position.x + x, position.y + y] == 1)
-                        return true;
-                }
-                catch (System.IndexOutOfRangeException)
-                {   // Return true if the position is not even on the map
-                    return true;
-                }
+        //for (int x = -1; x <= 1; x++)
+        //{
+        //    for (int y = -1; y <= 1; y++)
+        //    {
+        //        try
+        //        {
+        //            if (wallMap[position.x + x, position.y + y] == 1)
+        //                return true;
+        //        }
+        //        catch (System.IndexOutOfRangeException)
+        //        {   // Return true if the position is not even on the map
+        //            return true;
+        //        }
 
-            }
-        }
-        return false;
+        //    }
+        //}
+        //return false;
     }
 
     /*
