@@ -1,6 +1,0 @@
-Assignment 1, game mechanic (Create a game world using procedural generation)
-
-Idea: Create a tile-based cave system with semi-prefabbed rooms.
-Reason: Proff said to do tiles for compatability with the final, I want to try the other way myself, so why not both?
-
-1.https://learn.unity.com/tutorial/generating-content
