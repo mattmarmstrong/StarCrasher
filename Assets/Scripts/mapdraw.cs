@@ -6,11 +6,8 @@ public class mapdraw : MonoBehaviour
 {
     public Tilemap tilemap_open;
     public Tilemap tilemap_closed;
-    public Tile floorTile;
-    public Tile wallTile;
-
+    public GameObject tilePalette;
     public mapgen mapGrid;
-
     private int mapScanned = 0;
 
     // Start is called before the first frame update
@@ -34,13 +31,13 @@ public class mapdraw : MonoBehaviour
             clickedChunk.TogglePoint(tilepos[0], tilepos[1]);
             UpdateChunk(clickedChunk);
         }
-        if (mapScanned < 2)
-        {
-            Debug.Log("Scanning...");
-            AstarPath.active.Scan();
-            mapScanned++;
-            Debug.Log("After Scan.");
-        }
+        // if (mapScanned < 2)
+        // {
+        //     Debug.Log("Scanning...");
+        //     AstarPath.active.Scan();
+        //     mapScanned++;
+        //     Debug.Log("After Scan.");
+        // }
 
     }
 
@@ -51,13 +48,13 @@ public class mapdraw : MonoBehaviour
             for (int y = 0; y < chunkMap.GetUpperBound(1); y++) {
                 int trueX = x + chunkMap.GetUpperBound(0) * ch.mapPosX;
                 int trueY = y + chunkMap.GetUpperBound(1) * ch.mapPosY;
-                if(chunkMap[x,y] == 0) {
-                    tilemap_closed.SetTile(new Vector3Int(trueX, trueY, 0), null);
-                    tilemap_open.SetTile(new Vector3Int(trueX, trueY, 0), floorTile);
-                } else {
-                    tilemap_open.SetTile(new Vector3Int(trueX, trueY, 0), null);
-                    tilemap_closed.SetTile(new Vector3Int(trueX, trueY, 0), wallTile);
-                }
+                // if(chunkMap[x,y] == 0) {
+                //     tilemap_closed.SetTile(new Vector3Int(trueX, trueY, 0), null);
+                //     tilemap_open.SetTile(new Vector3Int(trueX, trueY, 0), floorTile);
+                // } else {
+                //     tilemap_open.SetTile(new Vector3Int(trueX, trueY, 0), null);
+                //     tilemap_closed.SetTile(new Vector3Int(trueX, trueY, 0), wallTile);
+                // }
             }
         }
     }
