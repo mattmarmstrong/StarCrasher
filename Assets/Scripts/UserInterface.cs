@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public abstract class UserInterface : MonoBehaviour
 {
     public InventoryObject inventory;
+    public ObjectWithStatsOrInventory ownership;
 
     public Dictionary<GameObject, InventorySlot> slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
 
@@ -109,7 +110,7 @@ public abstract class UserInterface : MonoBehaviour
         if (MouseData.slotHoveredOver)
         {
             InventorySlot mouseHoverSlotData = MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];
-            inventory.SwapItems(slotsOnInterface[obj], mouseHoverSlotData);
+            inventory.SwapItems(slotsOnInterface[obj], mouseHoverSlotData);   // from, to
         }
     }
 
