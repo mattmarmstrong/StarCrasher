@@ -33,6 +33,7 @@ public class mapdraw : MonoBehaviour
             Debug.Log(string.Format("X:{0}, Y:{1}", tilepos[0], tilepos[1]));
             clickedChunk.TogglePoint(tilepos[0], tilepos[1]);
             UpdateChunk(clickedChunk);
+            AstarPath.active.UpdateGraphs(new Bounds(pos, new Vector3(1, 1, 0)));
         }
         if (mapScanned < 2)
         {
