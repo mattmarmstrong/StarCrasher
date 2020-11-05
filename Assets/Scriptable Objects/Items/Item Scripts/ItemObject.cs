@@ -64,6 +64,10 @@ public class Item
         {
             buffs[i] = new ItemBuff(itemObject.data.buffs[i].min, itemObject.data.buffs[i].max);
             buffs[i].attribute = itemObject.data.buffs[i].attribute;
+            
+            //var temp = itemObject.data.buffs[i];
+            //Debug.Log(itemObject + " " + temp + " " + temp.attribute + " " + temp.max + " " + temp.min + " " + temp.value, itemObject);
+            
         }
     }
 }
@@ -81,6 +85,13 @@ public class ItemBuff
         this.min = min;
         this.max = max;
         GenerateValue();
+    }
+
+    public ItemBuff(int min, int max, int value)
+    {
+        this.min = min;
+        this.max = max;
+        this.value = value;
     }
 
     public void GenerateValue()
