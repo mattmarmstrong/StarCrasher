@@ -8,7 +8,8 @@ Turf - Custom Map tiles with additional properties
 Any turfs used by the map generator must go to Resources/Turfs to be collected at runtime.
 \*/
 public class Turf : Tile {
-    
+    [SerializeField]
+    public int id; // Every tile type must have a unique ID for file loading
 }
 
 [CreateAssetMenuAttribute(fileName="ClosedTurf", menuName="Turf/ClosedTurf")]

@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-enum TurfRecord {
-    StoneFloor,
-    StoneWall,
-    SolidWall
-}
 public class TurfManager : MonoBehaviour
 {
-    private List<Turf> TurfList;
+    private Dictionary<int, Turf> TurfList;
 
     private void Start()
     {
-        TurfList = new List<Turf>();
+        TurfList = new Dictionary<int, Turf>();
         GetTurfsFromResources();
     }
 
@@ -24,8 +16,10 @@ public class TurfManager : MonoBehaviour
     }
     private void GetTurfsFromResources()
     {
-        foreach(string name in Enum.GetNames(typeof(TurfRecord))) {
-            TurfList.Add(Resources.Load<Turf>("Turfs/" + name));
+        Turf[] loadedTurfs = Resources.LoadAll<Turf>("Turfs");
+        foreach(Turf t in loadedTurfs) {
+            Debug.Log(t.name);
+            TurfList[t.id] = t;
         }
     }
 }
