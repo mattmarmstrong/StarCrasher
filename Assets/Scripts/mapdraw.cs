@@ -4,13 +4,12 @@ using UnityEngine.Tilemaps;
 
 public class mapdraw : MonoBehaviour
 {
-    public Tilemap tilemap_open;
-    public Tilemap tilemap_closed;
-    public Tile floorTile;
-    public Tile wallTile;
-
+    [SerializeField]
+    private Tilemap tilemap_open;
+    [SerializeField]
+    private Tilemap tilemap_closed;
+    public TurfManager Turfs;
     public mapgen mapGrid;
-
     private int mapScanned = 0;
 
     // Start is called before the first frame update
@@ -19,6 +18,22 @@ public class mapdraw : MonoBehaviour
         foreach (List<Chunk> chunkList in mapGrid.chunkMap) {
             foreach(Chunk ch in chunkList) {
                 UpdateChunk(ch);
+            }
+        }
+    }
+
+    public void DrawFromMap(int[,] map,int chunkX = 0, int chunkY = 0) {
+
+        for (int x = 0; x < map.GetUpperBound(0); x++){
+            for (int y = 0; y < map.GetUpperBound(1); y++) {
+                int trueX = x + map.GetUpperBound(0) * chunkX;
+                int trueY = y + map.GetUpperBound(1) * chunkY;
+                Turf t = Turfs.GetTurf(map[x,y]);
+                if(t is OpenTurf) {
+                    tilemap_open.SetTile(new Vector3Int(trueX, trueY, 0), t);
+                } else {
+                    tilemap_closed.SetTile(new Vector3Int(trueX, trueY, 0), t);
+                }
             }
         }
     }
@@ -35,32 +50,20 @@ public class mapdraw : MonoBehaviour
             UpdateChunk(clickedChunk);
             AstarPath.active.UpdateGraphs(new Bounds(pos, new Vector3(1, 1, 0)));
         }
-        if (mapScanned < 2)
-        {
-            Debug.Log("Scanning...");
-            AstarPath.active.Scan();
-            mapScanned++;
-            Debug.Log("After Scan.");
-        }
+        // if (mapScanned < 2)
+        // {
+        //     Debug.Log("Scanning...");
+        //     AstarPath.active.Scan();
+        //     mapScanned++;
+        //     Debug.Log("After Scan.");
+        // }
 
     }
 
     void UpdateChunk(Chunk ch)
     {
         int[,] chunkMap = ch.GetMapArray();
-        for (int x = 0; x < chunkMap.GetUpperBound(0); x++){
-            for (int y = 0; y < chunkMap.GetUpperBound(1); y++) {
-                int trueX = x + chunkMap.GetUpperBound(0) * ch.mapPosX;
-                int trueY = y + chunkMap.GetUpperBound(1) * ch.mapPosY;
-                if(chunkMap[x,y] == 0) {
-                    tilemap_closed.SetTile(new Vector3Int(trueX, trueY, 0), null);
-                    tilemap_open.SetTile(new Vector3Int(trueX, trueY, 0), floorTile);
-                } else {
-                    tilemap_open.SetTile(new Vector3Int(trueX, trueY, 0), null);
-                    tilemap_closed.SetTile(new Vector3Int(trueX, trueY, 0), wallTile);
-                }
-            }
-        }
+        DrawFromMap(chunkMap, ch.mapPosX, ch.mapPosY);
     }
     private void ClearMap()
     {
