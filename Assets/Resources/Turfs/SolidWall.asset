@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: SolidWall
   m_EditorClassIdentifier: Assembly-CSharp::ClosedTurf
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e2f5e4c69add9ef4187f665d59e82330, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -33,4 +33,6 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 1
+  m_ColliderType: 2
+  integrity: 0
+  turfUnder: {fileID: 0}
