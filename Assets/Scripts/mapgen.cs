@@ -4,64 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class mapgen : MonoBehaviour {
+    public mapdraw mapRenderer;
     public int mapSize;
-    public int chunkSize;
     [Range(0, 100)]
     public float fillProb;
     public int smoothCount;
-    public string mapSeed;
     public int roomSizeThreshold;
-    public int tunnelSize;
-    public List<List<Chunk>> chunkMap = new List<List<Chunk>>();
-    public GameObject player;
     private System.Random mapRng;
-    Grid worldGrid;
+    private Chunk currentMap;
 
     void Start()
     {
-        SeedRng(mapSeed);
-        worldGrid = GameObject.Find("MapGrid").GetComponent<Grid>();
-        //Initialize a group of starting chunks
-        for (int y = 0; y < mapSize; y++) {
-            List<Chunk> initChunks = new List<Chunk>();
-            for (int x = 0; x < mapSize; x++) {
-                initChunks.Add(NewChunk(x, y));
-            }
-            chunkMap.Add(initChunks);
-        }
-
-        Chunk spawnChunk = chunkMap[1][1];
-        for (int y = 0; y < chunkSize; y++) {
-            for (int x = 0; x < chunkSize; x++) {
-                if(spawnChunk.CountAdjacentWalls(x, y) == 0) {
-                    player.transform.position = CoordToVector(1, 1, x, y);
-                    return;
-                }
-            }
-        }
-    }
-
-    public Chunk LocateChunk(Vector3 position)
-    {
-        Vector3Int cellPosition = worldGrid.WorldToCell(position);
-        int indexX = Math.Abs(cellPosition.y / chunkSize);
-        int indexY = Math.Abs(cellPosition.x / chunkSize);
-
-        return chunkMap[Math.Abs(cellPosition.y / chunkSize)][Math.Abs(cellPosition.x / chunkSize)];
-    }
-
-    public int[] VectorToCoord(Vector3 v)
-    {
-        Vector3Int cellPos = worldGrid.WorldToCell(v);
-        return new int[2]{cellPos.x, cellPos.y};
-    }
-
-    public Vector3 CoordToVector(int chunkX, int chunkY, int posX, int posY) {
-        return worldGrid.CellToWorld(new Vector3Int(posX + chunkSize * chunkX, posY + chunkSize * chunkY, 0));
-    }
-    private Chunk NewChunk(int x, int y)
-    {
-        return new Chunk(x, y, chunkSize, smoothCount, roomSizeThreshold, tunnelSize, fillProb, mapRng, worldGrid);
+        SeedRng(LevelControl.Instance.mapSeed);
+        currentMap = new Chunk(mapSize, smoothCount, roomSizeThreshold, fillProb, mapRng);
     }
 
     void SeedRng(string seed = "random")
@@ -75,22 +30,16 @@ public class mapgen : MonoBehaviour {
 
 public class Chunk
 {
-    public int mapPosX;
-    public int mapPosY;
     int[,] map;
 
-    Grid worldGrid;
 
-    public Chunk(int x, int y, int size, int smoothCount, int roomSizeThreshold, int tunnelSize, float fillProb, System.Random rng, Grid wGrid)
+    public Chunk(int size, int smoothCount, int roomSizeThreshold, float fillProb, System.Random rng)
     {
-        mapPosX = x;
-        mapPosY = y;
-        worldGrid = wGrid;
         map = new int[size, size];
-        BuildChunk(smoothCount, roomSizeThreshold, tunnelSize, fillProb, rng);
+        BuildChunk(smoothCount, roomSizeThreshold, fillProb, rng);
     }
 
-    private async void BuildChunk(int smoothCount, int roomSizeThreshold, int tunnelSize, float fillProb, System.Random rng)
+    private async void BuildChunk(int smoothCount, int roomSizeThreshold, float fillProb, System.Random rng)
     {
         //Debug.Log(String.Format("Starting Chunk {0},{1}", mapPosX, mapPosY));
         FillMap(fillProb, rng);
@@ -120,18 +69,6 @@ public class Chunk
         } else {
             map[x,y] = 0;
         }
-    }
-
-    public int[] GetTilePoint(Vector3 pos) {
-        Vector3Int intVector = worldGrid.WorldToCell(pos);
-        return new int[2] {intVector.x - map.GetUpperBound(0) * mapPosX, intVector.y - map.GetUpperBound(1) * mapPosY};
-    }
-
-
-    public Vector3 GetWorldPos(Vector3Int tilePos)
-    {
-        Vector3Int newPos = new Vector3Int(tilePos.x + map.GetUpperBound(0) / mapPosX, tilePos.y + map.GetUpperBound(1) / mapPosY, 0);
-        return worldGrid.CellToWorld(newPos);
     }
 
     struct Coord
