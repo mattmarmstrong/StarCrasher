@@ -50,7 +50,7 @@ public class MapOptions
     public MapOptions(int progress)
     {
         roomSizeThreshold = Math.Max(800 - 20 * progress, 20);
-        fillProb = (float)Math.Sqrt(progress / 2) + 55;
+        fillProb = (float)Math.Sqrt(progress / 2) + 58;
     }
 }
 public class Chunk
@@ -108,6 +108,7 @@ public class Chunk
             }
         }
         Task.WaitAll(tileTasks.ToArray());
+        Debug.Log("Tiles Filled...");
     }
     //Determines if a tile should be filled semi-randomly, used in FillMap()
     private void GenerateTile(int xPos, int yPos, float fillProb)
