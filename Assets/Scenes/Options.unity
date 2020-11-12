@@ -341,6 +341,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6900244266174702250, guid: 3ad8f5776e0874287bfdbee6d7f6de2c, type: 3}
+      propertyPath: m_Name
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 6900244266174702251, guid: 3ad8f5776e0874287bfdbee6d7f6de2c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 160
