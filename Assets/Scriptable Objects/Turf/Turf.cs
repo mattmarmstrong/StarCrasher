@@ -16,7 +16,6 @@ public class Turf : Tile {
 public class ClosedTurf : Turf
 {
     public int integrity; //Damage taken before breaking
-    public OpenTurf turfUnder; //Open turf created when destroyed
 }
 [CreateAssetMenuAttribute(fileName="OpenTurf", menuName="Turf/OpenTurf")]
 public class OpenTurf : Turf {
