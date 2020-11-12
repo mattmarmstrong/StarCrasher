@@ -24,10 +24,12 @@ public class UIController : MonoBehaviour
             if (!showingOptions)
             {
                 createdMenuObject = Instantiate(optionsMenuPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                Time.timeScale = 0;
             }
             else
             {
                 Destroy(createdMenuObject);
+                Time.timeScale = 1;
             }
             showingOptions = !showingOptions;
             //showingOptions = !showingOptions;
