@@ -8,18 +8,17 @@ public class mapdraw : MonoBehaviour
     private Tilemap tilemap_open;
     [SerializeField]
     private Tilemap tilemap_closed;
-    private TurfRecord turfs;
-    public mapgen mapGrid;
     private int mapScanned = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        turfs = LevelControl.Instance.loadedTurfs.Turfs;
+        LevelControl.Instance.OnMapLoad += DrawFromMap;
     }
 
-    public void DrawFromMap(int[,] map,int chunkX = 0, int chunkY = 0) {
-
+    public void DrawFromMap(Chunk mapData) {
+        int[,] map = mapData.map;
+        TurfRecord turfs = LevelControl.Instance.loadedTurfs.Turfs;
         for (int x = 0; x < map.GetUpperBound(0); x++){
             for (int y = 0; y < map.GetUpperBound(1); y++) {
                 Turf t = turfs[map[x,y]];
