@@ -15,9 +15,9 @@ MonoBehaviour:
   uiDisplay: {fileID: 21300000, guid: eb30fbe1558395c4ca4c9efc81fbd1d4, type: 3}
   stackable: 0
   type: 4
-  description: 
+  description: Upgraded chestplate that offers increased protection.
   data:
-    name: 
+    name: Chest +1
     ID: 7
     buffs:
     - attribute: 2

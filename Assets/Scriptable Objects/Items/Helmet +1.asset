@@ -15,9 +15,9 @@ MonoBehaviour:
   uiDisplay: {fileID: 21300000, guid: 4cf578c1930de9f45833ff67360d1f34, type: 3}
   stackable: 0
   type: 1
-  description: 
+  description: Upgraded helmet that offers increased protection.
   data:
-    name: 
+    name: Helmet +1
     ID: 11
     buffs:
     - attribute: 2

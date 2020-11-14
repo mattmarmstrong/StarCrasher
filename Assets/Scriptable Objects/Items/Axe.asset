@@ -17,7 +17,7 @@ MonoBehaviour:
   type: 2
   description: A hefty axe for chopping through things.
   data:
-    name: 
+    name: Axe
     ID: 1
     buffs:
     - attribute: 3

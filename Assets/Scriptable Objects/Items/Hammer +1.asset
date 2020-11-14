@@ -15,9 +15,9 @@ MonoBehaviour:
   uiDisplay: {fileID: 21300000, guid: 0ad0de1e3fb815a48950fc430bbd8f55, type: 3}
   stackable: 0
   type: 2
-  description: 
+  description: Upgraded hammer with reinforced sledge.
   data:
-    name: 
+    name: Hammer +1
     ID: 10
     buffs:
     - attribute: 2
