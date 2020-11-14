@@ -15,9 +15,9 @@ MonoBehaviour:
   uiDisplay: {fileID: 21300000, guid: 6746dbda436887b4cb254a228157b28f, type: 3}
   stackable: 0
   type: 2
-  description: A hefty axe with seratted edge for additional carnage.
+  description: Upgraded axe with seratted edge for additional carnage.
   data:
-    name: 
+    name: Axe +1
     ID: 0
     buffs:
     - attribute: 2

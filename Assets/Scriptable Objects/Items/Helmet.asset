@@ -15,9 +15,9 @@ MonoBehaviour:
   uiDisplay: {fileID: 21300000, guid: a3ce3f24044d6664e8269e978922136b, type: 3}
   stackable: 0
   type: 1
-  description: 
+  description: Sturdy helmet that offers marginal protection.
   data:
-    name: 
+    name: Helmet
     ID: 9
     buffs:
     - attribute: 2

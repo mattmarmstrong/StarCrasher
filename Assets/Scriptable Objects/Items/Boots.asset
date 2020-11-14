@@ -15,9 +15,9 @@ MonoBehaviour:
   uiDisplay: {fileID: 6471586766639389086, guid: 0a5135086b8376d4b8748543fe38fd30, type: 3}
   stackable: 0
   type: 5
-  description: 
+  description: Gotta go fast!
   data:
-    name: 
+    name: Boots
     ID: 6
     buffs:
     - attribute: 0
