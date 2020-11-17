@@ -12,6 +12,6 @@ public class Turf : Tile {
     [SerializeField]
     public int id; // Every tile type must have a unique ID for file loading
     public bool open; // Is the tile meant to be collided with
-    public uint integrity; //Turf "health"
+    public int integrity; //Turf "health"
     public Turf under; //Turf to be spawned once the current one is destroyed
 }
