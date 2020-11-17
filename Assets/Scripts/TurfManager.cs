@@ -1,50 +1,27 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class TurfManager
+public class TurfManager : MonoBehaviour
 {
-    private TurfRecord record;
+    private Turf[] turfs;
 
-    public TurfManager(string path = "Turfs")
-    {
-        record = GetTurfsFromResources(path);
-    }
-    private TurfRecord GetTurfsFromResources(string path)
-    {
-        Turf[] loadedTurfs = Resources.LoadAll<Turf>(path);
-        Dictionary<int, Turf> turfDict = new Dictionary<int, Turf>();
-        foreach(Turf t in loadedTurfs) {
-            Debug.Log(t.name);
-            turfDict[t.id] = t;
-        }
-        return new TurfRecord(turfDict);
-    }
-    public void ReloadTurfs(string path = "Turfs") {
-        record = GetTurfsFromResources(path);
-    }
-    public TurfRecord Turfs {
-        get {return record;}
-    }
-}
+    [SerializeField]
+    private Turf floorTurf;
+    [SerializeField]
+    private Turf wallTurf;
+    [SerializeField]
+    private Turf unbreakableTurf;
 
-public class TurfRecord {
-    private Turf[] Turfs;
-    public TurfRecord(Dictionary<int, Turf> turfsFromFile)
+    private void Awake()
     {
-        int arraySize = turfsFromFile.Keys.Max();
-        Turfs = new Turf[arraySize+1]; //+1 to account for 0
-        for (int i=0; i < arraySize; i++) {
-            try {
-                Turfs[i] = turfsFromFile[i];
-            } catch (KeyNotFoundException) {
-                Turfs[i] = null;
-            }
-        }
+        turfs = new Turf[] {
+            floorTurf,
+            wallTurf,
+            unbreakableTurf
+        };
     }
-    public Turf this[int index]
+    public Turf this[int i]
     {
-        get => Turfs[index];
+        get { return turfs[i]; }
     }
-    public int Length => Turfs.Length;
 }

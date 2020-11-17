@@ -7,17 +7,11 @@ using UnityEngine.Tilemaps;
 Turf - Custom Map tiles with additional properties
 Any turfs used by the map generator must go to Resources/Turfs to be collected at runtime.
 \*/
+[CreateAssetMenuAttribute(fileName="Turf", menuName="Turf")]
 public class Turf : Tile {
     [SerializeField]
     public int id; // Every tile type must have a unique ID for file loading
-}
-
-[CreateAssetMenuAttribute(fileName="ClosedTurf", menuName="Turf/ClosedTurf")]
-public class ClosedTurf : Turf
-{
-    public int integrity; //Damage taken before breaking
-}
-[CreateAssetMenuAttribute(fileName="OpenTurf", menuName="Turf/OpenTurf")]
-public class OpenTurf : Turf {
-    
+    public bool open; // Is the tile meant to be collided with
+    public uint integrity; //Turf "health"
+    public Turf under; //Turf to be spawned once the current one is destroyed
 }
