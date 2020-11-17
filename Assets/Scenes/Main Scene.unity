@@ -1603,6 +1603,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemObject: {fileID: 11400000, guid: dd4e58b01fdea73418f306c060479bd7, type: 2}
+--- !u!1 &413115048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 413115049}
+  - component: {fileID: 413115050}
+  m_Layer: 0
+  m_Name: TurfManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &413115049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413115048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1735367185}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &413115050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413115048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c852d609809add44caf2af6e68c5bfa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorTurf: {fileID: 11400000, guid: 7a513c3b24432af49b23fdc7ccc35b1f, type: 2}
+  wallTurf: {fileID: 11400000, guid: 64947bf46ded961459210b78a4e16dcd, type: 2}
+  unbreakableTurf: {fileID: 11400000, guid: 0b3aea91c4a7cce4bbf36281d4172799, type: 2}
 --- !u!1 &478375966
 GameObject:
   m_ObjectHideFlags: 0
@@ -5401,8 +5447,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapRenderer: {fileID: 1721328192}
   mapSize: 100
-  fillProb: 59.4
-  smoothCount: 1
+  fillProb: 56
+  smoothCount: 2
   roomSizeThreshold: 200
 --- !u!4 &1640613490
 Transform:
@@ -5975,6 +6021,7 @@ MonoBehaviour:
   progress: 0
   player: {fileID: 1901598621}
   mapSeed: random
+  turfs: {fileID: 413115050}
 --- !u!4 &1735367185
 Transform:
   m_ObjectHideFlags: 0
@@ -5985,7 +6032,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 413115049}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

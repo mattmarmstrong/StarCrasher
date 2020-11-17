@@ -25,13 +25,12 @@ public class mapgen : MonoBehaviour {
     {
         SeedRng(LevelControl.Instance.mapSeed);
         currentMap = new Chunk(mapSize, smoothCount, mapRng);
-        MapOptions options = new MapOptions(LevelControl.Instance.progress);
-        LoadMap(options);
+        LoadMap();
     }
 
-    private async void LoadMap(MapOptions options)
+    private async void LoadMap()
     {
-        await Task.Run(() => currentMap.Build(options));
+        await Task.Run(() => currentMap.Build(fillProb, roomSizeThreshold));
         LevelControl.Instance.MapLoad(currentMap);
     }
 
@@ -43,19 +42,11 @@ public class mapgen : MonoBehaviour {
         mapRng = new System.Random(seed.GetHashCode());
     }
 }
-public class MapOptions
-{
-    public int roomSizeThreshold;
-    public float fillProb;
-    public MapOptions(int progress)
-    {
-        roomSizeThreshold = Math.Max(800 - 20 * progress, 20);
-        fillProb = (float)Math.Sqrt(progress / 2) + 58;
-    }
-}
 public class Chunk
 {
     int[,] mapArray;
+    List<Room> areas;
+
     private int smoothCount;
     private System.Random random;
     public int[,] map
@@ -72,20 +63,15 @@ public class Chunk
         smoothCount = smCount;
         random = rng;
     }
-    public async void Build(MapOptions options)
+    public async void Build(float fillProb, int roomSizeThreshold)
     {
-        FillMap(options.fillProb);
+        FillMap(fillProb);
         for (int i = 0; i < smoothCount; i++) {
             SmoothMap();
         }
 
-        var roomTask = FillPocketAreas(options.roomSizeThreshold);
+        var roomTask = FillPocketAreas(roomSizeThreshold);
         List<Room> chunkRooms = await roomTask;
-    }
-
-    public int[,] GetMapArray()
-    {
-        return mapArray;
     }
 
     struct Coord
@@ -101,13 +87,11 @@ public class Chunk
     //Fills mapArray with random noise
     void FillMap(float fillProb)
     {
-        List<Task> tileTasks = new List<Task>();
         for (int x = 0; x < mapArray.GetUpperBound(0); x++){
             for (int y = 0; y < mapArray.GetUpperBound(1); y++) {
-                tileTasks.Add(Task.Factory.StartNew(() => GenerateTile(x, y, fillProb)));
+                GenerateTile(x, y, fillProb);
             }
         }
-        Task.WaitAll(tileTasks.ToArray());
         Debug.Log("Tiles Filled...");
     }
     //Determines if a tile should be filled semi-randomly, used in FillMap()
@@ -128,7 +112,7 @@ public class Chunk
                     continue; //Ignores border walls, which should be indestructable
                 }
                 int neighbouringWalls = CountAdjacentWalls(x, y);
-                if (neighbouringWalls > 4) {
+                if (neighbouringWalls > 5) {
                     mapArray[x,y] = 1;
                 } else if (neighbouringWalls < 4) {
                     mapArray[x,y] = 0;
@@ -234,9 +218,6 @@ public class Chunk
         public List<Coord> border;
         public List<Room> linkedRooms;
         public int size;
-
-        public Room()
-        {}
 
         public Room(List<Coord> roomArea, int[,] mapArray)
         {

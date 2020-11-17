@@ -5,9 +5,9 @@ using UnityEngine.Tilemaps;
 public class mapdraw : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap tilemap_open;
+    public Tilemap tilemap_open;
     [SerializeField]
-    private Tilemap tilemap_closed;
+    public Tilemap tilemap_closed;
     private int mapScanned = 0;
 
     // Start is called before the first frame update
@@ -18,11 +18,11 @@ public class mapdraw : MonoBehaviour
 
     public void DrawFromMap(Chunk mapData) {
         int[,] map = mapData.map;
-        TurfRecord turfs = LevelControl.Instance.loadedTurfs.Turfs;
+        TurfManager turfs = LevelControl.Instance.turfs;
         for (int x = 0; x < map.GetUpperBound(0); x++){
             for (int y = 0; y < map.GetUpperBound(1); y++) {
                 Turf t = turfs[map[x,y]];
-                if(t is OpenTurf) {
+                if(t.open) {
                     tilemap_open.SetTile(new Vector3Int(x, y, 0), t);
                 } else {
                     tilemap_closed.SetTile(new Vector3Int(x, y, 0), t);
