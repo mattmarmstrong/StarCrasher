@@ -214,7 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: c162a99178cc4d448a2da88358c34a4b, type: 2}
   ownership: {fileID: 1901598627}
-  tooltip_Item: {fileID: 7827291833004386255}
+  tooltip_Item: {fileID: 0}
   inventoryPrefab: {fileID: 3573087657699000661, guid: 4b58b1fc66951634bb689879ebc240aa, type: 3}
   X_START: -136
   Y_START: 223
@@ -1344,7 +1344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 4992f6c996b5ba2419da5b1fb2bbbe4d, type: 2}
   ownership: {fileID: 1901598627}
-  tooltip_Item: {fileID: 7827291833004386255}
+  tooltip_Item: {fileID: 0}
   slots:
   - {fileID: 1334669670}
   - {fileID: 1585466596}
@@ -1647,8 +1647,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorTurf: {fileID: 11400000, guid: 7a513c3b24432af49b23fdc7ccc35b1f, type: 2}
-  wallTurf: {fileID: 11400000, guid: 64947bf46ded961459210b78a4e16dcd, type: 2}
-  unbreakableTurf: {fileID: 11400000, guid: 0b3aea91c4a7cce4bbf36281d4172799, type: 2}
+  wallTurf: {fileID: 11400000, guid: 0b3aea91c4a7cce4bbf36281d4172799, type: 2}
+  unbreakableTurf: {fileID: 11400000, guid: 64947bf46ded961459210b78a4e16dcd, type: 2}
 --- !u!1 &478375966
 GameObject:
   m_ObjectHideFlags: 0
