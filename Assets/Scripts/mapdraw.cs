@@ -43,13 +43,15 @@ public class mapdraw : MonoBehaviour
         //     UpdateChunk(clickedChunk);
         //     AstarPath.active.UpdateGraphs(new Bounds(pos, new Vector3(1, 1, 0)));
         // }
-        // if (mapScanned < 2)
-        // {
-        //     Debug.Log("Scanning...");
-        //     AstarPath.active.Scan();
-        //     mapScanned++;
-        //     Debug.Log("After Scan.");
-        // }
+
+        // Scan for two frames to make sure map is loaded when scanning
+        if (mapScanned < 2)
+        {
+            Debug.Log("Scanning...");
+            AstarPath.active.Scan();
+            mapScanned++;
+            Debug.Log("After Scan.");
+        }
 
     }
     private void ClearMap()
