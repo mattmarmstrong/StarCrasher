@@ -92,7 +92,6 @@ public class Chunk
                 GenerateTile(x, y, fillProb);
             }
         }
-        Debug.Log("Tiles Filled...");
     }
     //Determines if a tile should be filled semi-randomly, used in FillMap()
     private void GenerateTile(int xPos, int yPos, float fillProb)
