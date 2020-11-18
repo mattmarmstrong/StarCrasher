@@ -10,10 +10,8 @@ public class PlayerCombat : MonoBehaviour
 
     //transforms to set attacks in each direction 
 
-    public Transform attackFront;
-    public Transform attackBack;
-    public Transform attackRight;
-    public Transform attackLeft;
+    public Transform attack;
+    
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     public LayerMask wallLayers;
@@ -33,39 +31,15 @@ public class PlayerCombat : MonoBehaviour
         animator.SetTrigger("Attack");
 
         //create an array to store which enemies were hit 
-        Collider2D[] hitEnemiesFront = Physics2D.OverlapCircleAll(attackFront.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attack.position, attackRange, enemyLayers);
 
-        Collider2D[] hitEnemiesBack = Physics2D.OverlapCircleAll(attackFront.position, attackRange, enemyLayers);
-
-        Collider2D[] hitEnemiesLeft = Physics2D.OverlapCircleAll(attackFront.position, attackRange, enemyLayers);
-
-        Collider2D[] hitEnemiesRight = Physics2D.OverlapCircleAll(attackFront.position, attackRange, enemyLayers);
-
-        Collider2D[] hitWalls = Physics2D.OverlapCircleAll(attackFront.position, attackRange, wallLayers);
-
-        foreach (Collider2D enemy in hitEnemiesFront)
+        foreach (Collider2D enemy in hitEnemies)
         {
-         
+            enemy.GetComponent<EnemyCombat>.TakeDamage(20);         
             UnityEngine.Debug.Log("You have hit " + enemy.name);
         }
 
-        foreach (Collider2D enemy in hitEnemiesBack)
-        {
-           // enemy.GetComponent<Enemy1>.TakeDamage(10);
-            UnityEngine.Debug.Log("You have hit " + enemy.name);
-        }
-
-        foreach (Collider2D enemy in hitEnemiesLeft)
-        {
-           // enemy.GetComponent<Enemy1>.TakeDamage(10);
-            UnityEngine.Debug.Log("You have hit " + enemy.name);
-        }
-
-        foreach (Collider2D enemy in hitEnemiesRight)
-        {
-           // enemy.GetComponent<Enemy1>.TakeDamage(10);
-            UnityEngine.Debug.Log("You have hit " + enemy.name);
-        }
+        
 
         foreach (Collider2D wall in hitWalls)
         {
