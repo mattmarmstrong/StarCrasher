@@ -5974,6 +5974,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap_open: {fileID: 1163826958}
   tilemap_closed: {fileID: 954899433}
+  enemy: {fileID: 4288322775598255774, guid: 92dd9edb690c14599bf05f37ac55dc3c, type: 3}
+  numEnemies: 10
 --- !u!156049354 &1721328193
 Grid:
   m_ObjectHideFlags: 0

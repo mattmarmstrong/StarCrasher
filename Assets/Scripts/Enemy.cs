@@ -17,20 +17,11 @@ public class Enemy : MonoBehaviour
         var aiDestSetter = GetComponent<AIDestinationSetter>();
         aiDestSetter.target = player.transform;
 
+        
     }
 
     private void Update()
     {
-        if (!posInitialized)
-        {
-            Vector3 startPos;
-            if (this.name == "Enemy1")
-                startPos = player.transform.position + new Vector3(0.5f, 0.1f, 0f);
-            else
-                startPos = player.transform.position + new Vector3(-0.5f, 0.1f, 0f);
-            transform.position = startPos;
-            posInitialized = true;
-        }
 
     }
 }
