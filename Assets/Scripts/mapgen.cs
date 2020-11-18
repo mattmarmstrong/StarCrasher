@@ -8,7 +8,8 @@ ensure they match the ID numbers given in Resources/Turfs \*/
 enum tileIndex {
     ground,
     wall,
-    unbreakable
+    unbreakable,
+    nextfloor
 }
 
 public class mapgen : MonoBehaviour {
@@ -28,9 +29,9 @@ public class mapgen : MonoBehaviour {
         LoadMap();
     }
 
-    private async void LoadMap()
+    private void LoadMap()
     {
-        await Task.Run(() => currentMap.Build(fillProb, roomSizeThreshold));
+        currentMap.Build(fillProb, roomSizeThreshold);
         LevelControl.Instance.MapLoad(currentMap);
     }
 
@@ -72,6 +73,7 @@ public class Chunk
 
         var roomTask = FillPocketAreas(roomSizeThreshold);
         List<Room> chunkRooms = await roomTask;
+        SetEndPoint(chunkRooms[random.Next(chunkRooms.Count)]);
     }
 
     struct Coord
@@ -235,6 +237,16 @@ public class Chunk
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private void SetEndPoint(Room EndRoom)
+    {
+        foreach (Coord point in EndRoom.area) {
+            if(CountAdjacentWalls(point.posX, point.posY) == 0) {
+                map[point.posX, point.posY] = (int)tileIndex.nextfloor;
+                return;
             }
         }
     }

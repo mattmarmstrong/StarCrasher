@@ -4,21 +4,23 @@ using UnityEngine.Tilemaps;
 
 public class mapdraw : MonoBehaviour
 {
-    [SerializeField]
     public Tilemap tilemap_open;
-    [SerializeField]
     public Tilemap tilemap_closed;
     private int mapScanned = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        if(tilemap_open == null || tilemap_closed == null) {
+            tilemap_open = GameObject.Find("OpenTiles").GetComponent<Tilemap>();
+            tilemap_closed = GameObject.Find("ClosedTiles").GetComponent<Tilemap>();
+        }
         LevelControl.Instance.OnMapLoad += DrawFromMap;
     }
 
     public void DrawFromMap(Chunk mapData) {
         int[,] map = mapData.map;
-        TurfManager turfs = LevelControl.Instance.turfs;
+        Turf[] turfs = LevelControl.Instance.turfs;
         for (int x = 0; x < map.GetUpperBound(0); x++){
             for (int y = 0; y < map.GetUpperBound(1); y++) {
                 Turf t = turfs[map[x,y]];
