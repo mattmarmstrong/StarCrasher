@@ -11,7 +11,7 @@ public class EnemyCombat : MonoBehaviour
     public float attackRange = 1f;
 
     public LayerMask playerLayer;
-    public LayerMask enemyLayer; 
+    public LayerMask enemyLayer;
 
 
     int damagePerAttack;
@@ -29,9 +29,9 @@ public class EnemyCombat : MonoBehaviour
         {
             Attack();
         }
-        
-        
-       
+
+
+
     }
 
     public void setDpa(int dPA)
@@ -44,18 +44,7 @@ public class EnemyCombat : MonoBehaviour
         //Wait a full second before attacking to create an intermitten attack 
         yield return new WaitForSeconds(1.0f);
 
-        //Looks for overlap with player layer in the attack range
-
-        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attack.position, attackRange, playerLayer);
-
-        
-        foreach (Collider2D p in hitPlayer)
-        {
-            p.GetComponent<PlayerHealth>().TakeDamage(damagePerAttack);
-        }
-        
-       
-       
+ 
     }
 
 
@@ -63,7 +52,7 @@ public class EnemyCombat : MonoBehaviour
     {
         currentHealth -= damage;
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -71,11 +60,10 @@ public class EnemyCombat : MonoBehaviour
 
     void Die()
     {
-        //GetComponent<AIPath>().enabled = false;
-        GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
-       
-        
+        Destroy(gameObject);
+
+
+
     }
 
 
