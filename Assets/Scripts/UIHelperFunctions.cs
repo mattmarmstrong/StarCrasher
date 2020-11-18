@@ -7,9 +7,19 @@ public class UIHelperFunctions : MonoBehaviour
 {
     public void LoadScene(string scene_name)
     {
-        // Restart game timer when game scene is loaded
+
         if (scene_name == "Main Scene")
+        {
+            // Restart game timer when game scene is loaded
             Time.timeScale = 1;
+        }
+        else if(scene_name == "MainMenu" || scene_name == "GameOver")
+        {
+            // Destroy Level Object so new game starts fresh
+            Destroy(GameObject.Find("Level"));
+        }
+
+
         SceneManager.LoadScene(scene_name);
     }
 
