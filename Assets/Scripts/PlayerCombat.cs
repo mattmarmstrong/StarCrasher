@@ -35,15 +35,15 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyCombat>.TakeDamage(20);         
+            enemy.GetComponent<EnemyCombat>().TakeDamage(20);         
             UnityEngine.Debug.Log("You have hit " + enemy.name);
         }
 
         
 
-        foreach (Collider2D wall in hitWalls)
-        {
-            UnityEngine.Debug.Log(wall);
-        }
+        //foreach (Collider2D wall in hitWalls)
+        //{
+        //    UnityEngine.Debug.Log(wall);
+        //}
     }
 }
