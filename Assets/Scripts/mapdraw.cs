@@ -8,6 +8,11 @@ public class mapdraw : MonoBehaviour
     public Tilemap tilemap_open;
     [SerializeField]
     public Tilemap tilemap_closed;
+    [SerializeField]
+    public GameObject enemy;
+    [SerializeField]
+    public int numEnemies;
+
     private int mapScanned = 0;
 
     // Start is called before the first frame update
@@ -17,13 +22,39 @@ public class mapdraw : MonoBehaviour
     }
 
     public void DrawFromMap(Chunk mapData) {
+        int createdEnemies = 0;
+
+
         int[,] map = mapData.map;
         TurfManager turfs = LevelControl.Instance.turfs;
         for (int x = 0; x < map.GetUpperBound(0); x++){
             for (int y = 0; y < map.GetUpperBound(1); y++) {
                 Turf t = turfs[map[x,y]];
-                if(t.open) {
+
+                /* Test if this cell is near a wall to avoid placing enemies
+                    inside the walls with a rounding error */
+                bool nearWall = false;
+                for(int i = x - 1; i <= x + 1; i++)
+                {
+                    for(int j = y - 1; j <= y + 1; j++)
+                    {
+                        if (i < map.GetUpperBound(0) && i > map.GetLowerBound(0) &&
+                            j < map.GetUpperBound(1) && j > map.GetLowerBound(1) &&
+                            !turfs[map[i, j]].open)
+                            nearWall = true;
+                    }
+                }
+
+                if (t.open) {
+                    // Place enemies across the map
+                    if (x % 10 == 0 && y % 10 == 0 && createdEnemies < numEnemies && !nearWall)
+                    {
+                        Vector3 worldCoord = GetComponent<Grid>().CellToWorld(new Vector3Int(x, y, 0));
+                        Instantiate(enemy, worldCoord, Quaternion.identity);
+                        createdEnemies++;
+                    }
                     tilemap_open.SetTile(new Vector3Int(x, y, 0), t);
+                    
                 } else {
                     tilemap_closed.SetTile(new Vector3Int(x, y, 0), t);
                 }
