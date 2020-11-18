@@ -15,8 +15,8 @@ MonoBehaviour:
   uiDisplay: {fileID: 1660957820977104790, guid: 0a5135086b8376d4b8748543fe38fd30, type: 3}
   stackable: 1
   type: 6
-  description: Lifeless remains of something that use to exist.
+  description: Lifeless remains of the once living.
   data:
-    name: 
+    name: Bones
     ID: 2
     buffs: []

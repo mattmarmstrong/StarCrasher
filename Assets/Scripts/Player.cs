@@ -26,6 +26,7 @@ public class Player : ObjectWithStatsOrInventory
         EquipmentScreen.transform.Find("Strength").GetChild(0).GetComponent<TextMeshProUGUI>().text = Strength.ToString();
         EquipmentScreen.transform.Find("Intellect").GetChild(0).GetComponent<TextMeshProUGUI>().text = Intellect.ToString();
         EquipmentScreen.transform.Find("Agility").GetChild(0).GetComponent<TextMeshProUGUI>().text = Agility.ToString();
+        LevelControl.Instance.OnMapLoad += SpawnInMap;
     }
 
     void Update()
@@ -61,6 +62,20 @@ public class Player : ObjectWithStatsOrInventory
     private void FixedUpdate()
     {
         rb2d.MovePosition(rb2d.position + moveVelocity * Time.fixedDeltaTime);
+    }
+
+    void SpawnInMap(Chunk level)
+    {
+        Grid mapGrid = GameObject.Find("Grid").GetComponent<Grid>();
+        int[,] mapArray = level.map;
+        for (int x = 0; x < mapArray.GetUpperBound(0); x++){
+            for (int y = 0; y < mapArray.GetUpperBound(1); y++) {
+                if(mapArray[x,y] == 0 && level.CountAdjacentWalls(x,y) == 0) {
+                    transform.position = mapGrid.CellToWorld(new Vector3Int(x, y, 0));
+                    return;
+                }
+            }
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)

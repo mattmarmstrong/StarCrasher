@@ -74,11 +74,6 @@ public class Chunk
         List<Room> chunkRooms = await roomTask;
     }
 
-    public int[,] GetMapArray()
-    {
-        return mapArray;
-    }
-
     struct Coord
     {
         public int posX;
@@ -97,7 +92,6 @@ public class Chunk
                 GenerateTile(x, y, fillProb);
             }
         }
-        Debug.Log("Tiles Filled...");
     }
     //Determines if a tile should be filled semi-randomly, used in FillMap()
     private void GenerateTile(int xPos, int yPos, float fillProb)

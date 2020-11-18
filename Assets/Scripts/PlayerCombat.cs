@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Security.Cryptography;
+using UnityEngine.Tilemaps;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -14,9 +14,9 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackBack;
     public Transform attackRight;
     public Transform attackLeft;
-
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
+    public LayerMask wallLayers;
 
     // Update is called once per frame
     void Update()
@@ -40,6 +40,8 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemiesLeft = Physics2D.OverlapCircleAll(attackFront.position, attackRange, enemyLayers);
 
         Collider2D[] hitEnemiesRight = Physics2D.OverlapCircleAll(attackFront.position, attackRange, enemyLayers);
+
+        Collider2D[] hitWalls = Physics2D.OverlapCircleAll(attackFront.position, attackRange, wallLayers);
 
         foreach (Collider2D enemy in hitEnemiesFront)
         {
@@ -65,7 +67,9 @@ public class PlayerCombat : MonoBehaviour
             UnityEngine.Debug.Log("You have hit " + enemy.name);
         }
 
-
+        foreach (Collider2D wall in hitWalls)
+        {
+            UnityEngine.Debug.Log(wall);
+        }
     }
-
 }

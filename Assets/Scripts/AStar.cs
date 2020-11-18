@@ -243,7 +243,7 @@ public class AStar : MonoBehaviour
 
     private bool isWall(Vector3Int position)
     {
-        int[,] wallMap = chunk.GetMapArray();
+        int[,] wallMap = chunk.map;
 
         return (wallMap[position.x, position.y] == 1) || (wallMap[position.x, position.y+1] == 1);
 

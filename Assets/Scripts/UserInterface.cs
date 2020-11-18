@@ -10,6 +10,7 @@ public abstract class UserInterface : MonoBehaviour
 {
     public InventoryObject inventory;
     public ObjectWithStatsOrInventory ownership;
+    public TooltipItem tooltip_Item;
 
     public Dictionary<GameObject, InventorySlot> slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
 
@@ -53,12 +54,17 @@ public abstract class UserInterface : MonoBehaviour
     public void OnEnter(GameObject obj)
     {
         MouseData.slotHoveredOver = obj;
+        if (slotsOnInterface[obj] is InventorySlot)
+        {
+            tooltip_Item.ShowTooltip(obj, slotsOnInterface[obj]);
+        }
     }
 
     // Mouse hovers off of inventory slot
     public void OnExit(GameObject obj)
     {
         MouseData.slotHoveredOver = null;
+        tooltip_Item.HideTooltip();
     }
 
     // Mouse hovers over an interface

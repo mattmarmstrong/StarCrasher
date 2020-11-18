@@ -15,9 +15,9 @@ MonoBehaviour:
   uiDisplay: {fileID: 21300000, guid: a5baa2baa68d89540bbb1f60f345079f, type: 3}
   stackable: 0
   type: 4
-  description: 
+  description: Sturdy chestplate that offers marginal protection.
   data:
-    name: 
+    name: Chest
     ID: 8
     buffs:
     - attribute: 2

@@ -17,6 +17,6 @@ MonoBehaviour:
   type: 0
   description: A heart piece.  Restores HP.
   data:
-    name: 
+    name: Heart
     ID: 3
     buffs: []

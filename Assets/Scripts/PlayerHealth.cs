@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         if (currentHealth - damage < 0)
         {
@@ -44,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    void Heal(int heal)
+    public void Heal(int heal)
     {
         if (currentHealth + heal > maxHealth)
         {

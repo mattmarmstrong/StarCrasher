@@ -17,7 +17,7 @@ MonoBehaviour:
   type: 3
   description: A shield for defending.
   data:
-    name: 
+    name: Shield
     ID: 4
     buffs:
     - attribute: 2
