@@ -1,5 +1,8 @@
 # CMPT 306 Final Project
 
+#### TODO List
+https://docs.google.com/document/d/1GfyhCoyL17LzZWQXVHzY-AZfjnOTV5O7VupF770Bl4o/edit?usp=sharing
+
 #### Milestone 1: Game Pitch Presentation  
 https://docs.google.com/presentation/d/1Z2wLxRWwctBhINUn14ngvvrLjdoDqqk_zK6HLfsrAQA/edit?usp=sharing
 
