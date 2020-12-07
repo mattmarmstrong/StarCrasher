@@ -16,4 +16,9 @@ https://drive.google.com/drive/folders/1rS1Ru2Hb7DrqHXGzc-9Fuse2FYaDqclz
 https://docs.google.com/document/d/1V5YVhaRlEv08CYgwBrWtXjxoyPWJCviw97i7EHR7BVM/edit?usp=sharing
 
 #### Milestone 5: Final Submission
-https://drive.google.com/drive/folders/1-12qqRfK0sPYxZuAwilkhZdDf9uQ48nL?usp=sharing
+##### Code & Trailer folder
+https://drive.google.com/drive/folders/15F6CRH3je9LWlN51Ph9Om4CpNaUZFGVk?usp=sharing
+
+##### Game Build folder
+https://drive.google.com/drive/folders/1kXeczIKymFbdrJCYG32bvHQJDrqJh7cm?usp=sharing
+
